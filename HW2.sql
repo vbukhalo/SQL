@@ -1,5 +1,5 @@
 CREATE TABLE Countries(
-			name VARCHAR(20),
+			name VARCHAR(20) PRIMARY KEY,
 			latitude INT,
 			longitude INT,
 			area INT,
@@ -32,17 +32,17 @@ VALUES
 			('France', 4600, 200, 643801, 67106161, 2699, 2016),
 			('Switzerland', 4700, 800, 41277, 8236303, 496.3, 2016);
 
-INSERT INTO Borders (name, border1, border2, border3, border4, border5, border6, border7, border8, border9)
+INSERT INTO Borders (name, border1, border2, border3, border4, border5, border6, border7, border8)
 VALUES
 			('Germany','Netherlands', 'Belgium', 'Luxembourg', 'Poland', 'Czech Republic', 'Austria','France','Switzerland'),
-			('Netherlands', 'Belgium', 'Germany'),
-			('Belgium', 'France', 'Germany', 'Luxembourg', 'Netherlands'),
-			('Luxembourg', 'Belgium', 'France', 'Germany'),
-			('Poland', 'Czech Republic', 'Germany'),
-			('Czech Republic', 'Austria', 'Germany', 'Poland'),
-			('Austria', 'Czech Republic', 'Germany', 'Switzerland'),
-			('France', 'Belgium', 'Germany', 'Luxembourg', 'Switzerland'),
-			('Switzerland', 'Austria', 'France', 'Germany');			
+			('Netherlands', 'Belgium', 'Germany', NULL, NULL, NULL,NULL,NULL,NULL),
+			('Belgium', 'France', 'Germany', 'Luxembourg', 'Netherlands',NULL,NULL,NULL,NULL),
+			('Luxembourg', 'Belgium', 'France', 'Germany',NULL,NULL,NULL,NULL,NULL),
+			('Poland', 'Czech Republic', 'Germany',NULL,NULL,NULL,NULL,NULL,NULL),
+			('Czech Republic', 'Austria', 'Germany', 'Poland',NULL,NULL,NULL,NULL,NULL),
+			('Austria', 'Czech Republic', 'Germany', 'Switzerland',NULL,NULL,NULL,NULL,NULL),
+			('France', 'Belgium', 'Germany', 'Luxembourg', 'Switzerland',NULL,NULL,NULL,NULL),
+			('Switzerland', 'Austria', 'France', 'Germany',NULL,NULL,NULL,NULL,NULL);			
 
 SELECT * FROM BORDERS 
 	WHERE name = 'Germany';
