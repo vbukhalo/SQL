@@ -76,6 +76,7 @@ SELECT name, population FROM Countries
 	WHERE population > 35000000;
 
 --4e. Display all countries with population > 35 million AND border Germany
-SELECT borderingcountries FROM borders
-	INNER JOIN countries c on c.name = borderingcountries
-	WHERE borders.name = 'Germany' and c.population > 35000000;
+SELECT DISTINCT countries.name, borders.borderingcountries
+	FROM countries, borders
+	WHERE (countries.population > 35000000) 
+	AND (borders.borderingcountries = 'Germany');
