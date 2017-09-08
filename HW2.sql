@@ -1,25 +1,24 @@
+Vladimir Bukhalo
+Homework 1
+
+--2. Create Countries table
 CREATE TABLE Countries(
-			name VARCHAR(20) PRIMARY KEY,
+			name VARCHAR(20),
 			latitude INT,
 			longitude INT,
 			area INT,
 			population INT,
 			gdp INT,
-			gdpYear
+			gdpYear INT
 );
 
+--4a. Create Borders table
 CREATE TABLE Borders(
-			name VARCHAR(20) PRIMARY KEY REFERENCES Countries,
-			border1 VARCHAR(20),
-			border2 VARCHAR(20),
-			border3 VARCHAR(20),
-			border4 VARCHAR(20),
-			border5 VARCHAR(20),
-			border6 VARCHAR(20),
-			border7 VARCHAR(20),
-			border8 VARCHAR(20)
+			name VARCHAR(20),
+			borderingcountries VARCHAR(20)
 );
-			
+
+--4b. Populate Countries table			
 INSERT INTO Countries (name, latitude, longitude, area, population, gdp, gdpYear)
 VALUES
 			('Germany', 5100, 900, 357022, 80594017, 3979, 2016),
@@ -32,25 +31,51 @@ VALUES
 			('France', 4600, 200, 643801, 67106161, 2699, 2016),
 			('Switzerland', 4700, 800, 41277, 8236303, 496.3, 2016);
 
-INSERT INTO Borders (name, border1, border2, border3, border4, border5, border6, border7, border8)
+--4b. Populate Borders table
+INSERT INTO Borders (name, borderingcountries)
 VALUES
-			('Germany','Netherlands', 'Belgium', 'Luxembourg', 'Poland', 'Czech Republic', 'Austria','France','Switzerland'),
-			('Netherlands', 'Belgium', 'Germany', NULL, NULL, NULL,NULL,NULL,NULL),
-			('Belgium', 'France', 'Germany', 'Luxembourg', 'Netherlands',NULL,NULL,NULL,NULL),
-			('Luxembourg', 'Belgium', 'France', 'Germany',NULL,NULL,NULL,NULL,NULL),
-			('Poland', 'Czech Republic', 'Germany',NULL,NULL,NULL,NULL,NULL,NULL),
-			('Czech Republic', 'Austria', 'Germany', 'Poland',NULL,NULL,NULL,NULL,NULL),
-			('Austria', 'Czech Republic', 'Germany', 'Switzerland',NULL,NULL,NULL,NULL,NULL),
-			('France', 'Belgium', 'Germany', 'Luxembourg', 'Switzerland',NULL,NULL,NULL,NULL),
-			('Switzerland', 'Austria', 'France', 'Germany',NULL,NULL,NULL,NULL,NULL);			
+			('Germany', 'Netherlands'),
+			('Germany', 'Belgium'),
+			('Germany', 'Luxembourg'),
+			('Germany', 'Poland'),
+			('Germany', 'Czech Republic'),
+			('Germany', 'Austira'),
+			('Germany', 'France'),
+			('Germany', 'Switzerland'),
+			('Netherlands', 'Belgium'),
+			('Netherlands', 'Germany'),
+			('Belgium', 'France'),
+			('Belgium', 'Germany'),
+			('Belgium', 'Luxembourg'),
+			('Belgium', 'Netherlands'),			
+			('Luxembourg', 'Belgium'),
+			('Luxembourg', 'France'),
+			('Luxembourg', 'Germany'),
+			('Poland', 'Czech Republic'),
+			('Poland', 'Germany'),
+			('Czech Republic', 'Austria'),
+			('Czech Republic', 'Germany'),
+			('Czech Republic', 'Poland'),
+			('Austria', 'Czech Republic'),
+			('Austria', 'Germany'),
+			('Austria', 'Switzerland'),
+			('France', 'Belgium'),
+			('France', 'Germany'),
+			('France', 'Luxembourg'),
+			('France', 'Switzerland'),
+			('Switzerland', 'Austria'),
+			('Switzerland', 'France'),
+			('Switzerland', 'Germany');
 
-SELECT * FROM BORDERS 
+--4c. Display all countries bordering Germany
+SELECT name,borderingcountries FROM borders
 	WHERE name = 'Germany';
 
+--4d. Display all countries with population > 35 million
 SELECT name, population FROM Countries
 	WHERE population > 35000000;
 
-SELECT countries.name, countries.population
-	FROM countries, borders
-	WHERE countries.population > 35000000 
-	AND borders.name = 'Germany';
+--4e. Display all countries with population > 35 million AND border Germany
+SELECT borderingcountries FROM borders
+	INNER JOIN countries c on c.name = borderingcountries
+	WHERE borders.name = 'Germany' and c.population > 35000000;
